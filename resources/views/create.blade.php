@@ -78,6 +78,15 @@
                 placeholder="Product description"
                 class="rounded border-2 p-2"
             ></textarea>
+            <label for="categories">Choose a category:</label>
+
+            <select name="categories[]" id="categories" multiple>
+                @foreach ($categories as $category)
+                    <option value="{{ $category["id"] }}">
+                        {{ $category["name"] }}
+                    </option>
+                @endforeach
+            </select>
             <input
                 type="submit"
                 value="Submit"
@@ -91,7 +100,6 @@
             .getElementById('productImage')
             .addEventListener('change', function (event) {
                 const file = event.target.files[0];
-                console.log(file);
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function (e) {
