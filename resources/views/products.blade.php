@@ -7,14 +7,14 @@
             <div class="flex flex-wrap gap-5">
                 <a
                     href="{{ url("/products") }}"
-                    class="{{ "products" == last(explode("/", url()->current())) ? "bg-red-500 text-white" : "bg-gray-300" }} min-w-max rounded p-2 shadow"
+                    class="{{ "products" == last(explode("/", url()->current())) ? "bg-blue-500 text-white" : "bg-gray-300" }} min-w-max rounded  py-2 px-4 shadow"
                 >
                     Всі
                 </a>
                 @foreach ($categories as $category)
                     <a
                         href="{{ url("/products/category/{$category["id"]}") }}"
-                        class="{{ $category["id"] == last(explode("/", url()->current())) ? "bg-red-500 text-white" : "bg-gray-300" }} min-w-max rounded p-2 shadow"
+                        class="{{ $category["id"] == last(explode("/", url()->current())) ? "bg-blue-500 text-white" : "bg-gray-300" }} min-w-max rounded py-2 px-4 shadow"
                     >
                         {{ $category["name"] }}
                     </a>
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-4 gap-10">
+        <div class="grid grid-cols-4 gap-10 mt-6">
             <x-add-card />
             @foreach ($products as $product)
                 <x-product-card
