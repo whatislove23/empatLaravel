@@ -10,7 +10,7 @@ class ProductsController extends Controller
 {
     public function addProduct(Request $request)
     {
-        // dd($request->input('categories'));
+
         $request->validate([
             "img" => "required|image",
             "name" => "required",
@@ -18,19 +18,17 @@ class ProductsController extends Controller
             "description" => "required",
             "categories" => "required",
         ]);
-
         $products = new Product();
         $products->product_name = $request->input('name');
         $products->description = $request->input('description');
         $products->price = $request->input('price');
-        $products->sale = false;
-        $products->img = $request->file('img')->get();
+        $products->sale = $request->input("sale") == "on" ? 1 : 0;
+        $path = $request->file('img')->store('images', 'public');
+        $products->img_path = $path;
         $products->save();
         foreach ($request->input('categories') as $category) {
-
             $products->categories()->attach($category);
         }
-
         return redirect()->route('products');
     }
     public function loadAddForm()
@@ -43,6 +41,7 @@ class ProductsController extends Controller
         $data = Product::where("id", $id)->first();
         $categories = $data->categories()->get();
         $comments = $data->comments()->get();
+
         return view('product', [
             "item" => $data,
             "categories" => $categories,
@@ -51,16 +50,22 @@ class ProductsController extends Controller
     }
     public function getProductsByCategory($category_id)
     {
-        $products = Product::where("category_id", $category_id)->get();
-        dd($products);
+        $categories = Category::all();
+        $products = Category::find($category_id)->products;
+        return view('products', [
+            "products" => $products,
+            "categories" => $categories
+        ]);
     }
     public function getProducts()
     {
+        $categories = Category::all();
         $products = Product::get();
 
 
         return view('products', [
-            "products" => $products
+            "products" => $products,
+            "categories" => $categories
         ]);
     }
 }

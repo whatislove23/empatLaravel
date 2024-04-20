@@ -15,7 +15,7 @@
     >
         <img
             class="w-full"
-            src="data:image/jpeg;base64,{{ base64_encode($img) }}"
+            src="{{ asset("storage/" . $img) }}"
             alt="{{ $title }}"
         />
     </div>

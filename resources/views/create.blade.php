@@ -78,7 +78,13 @@
                 placeholder="Product description"
                 class="rounded border-2 p-2"
             ></textarea>
-            <label for="categories">Choose a category:</label>
+            <div class="flex gap-5">
+                <label for="sale" class="font-semibold">Sale</label>
+                <input type="checkbox" name="sale" id="id" />
+            </div>
+            <label for="categories" class="font-semibold">
+                Choose a category:
+            </label>
 
             <select name="categories[]" id="categories" multiple>
                 @foreach ($categories as $category)

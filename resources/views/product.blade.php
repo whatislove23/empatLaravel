@@ -6,7 +6,7 @@
             <div class="flex gap-10">
                 <div class="h-64 overflow-hidden rounded-md bg-gray-700">
                     <img
-                        src="data:image/jpeg;base64,{{ base64_encode($item["img"]) }}"
+                        src="{{ asset("storage/" . $item["img_path"]) }}"
                         alt="{{ $item["product_name"] }}"
                         class="h-full w-full object-contain"
                     />
@@ -41,7 +41,7 @@
             <div class="my-4 flex gap-2">
                 @foreach ($categories as $category)
                     <a
-                        href=""
+                        href="{{ url("/products/category/{$category["id"]}") }}"
                         class="rounded bg-gray-400 px-2 py-1 text-white shadow transition hover:scale-105 hover:bg-gray-500"
                     >
                         {{ $category["name"] }}

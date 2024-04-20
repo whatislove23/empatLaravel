@@ -16,9 +16,10 @@ return new class extends Migration {
             $table->text("description");
             $table->float("price");
             $table->boolean("sale");
+            $table->string("img_path");
             $table->timestamps();
         });
-        DB::statement("ALTER TABLE products ADD img LONGBLOB");
+
     }
 
     /**
